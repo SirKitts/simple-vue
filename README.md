@@ -26,7 +26,6 @@ $ npm install
 Install Vue Material:<br/>
 ```
 $ npm install vue-material --save
-$ yarn add vue-material
 ```
 
 Insert this in index.html
@@ -35,7 +34,7 @@ Insert this in index.html
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 ```
 
-Insert his in main.js
+Insert this in main.js
 ```
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
@@ -47,6 +46,7 @@ Start Server:<br/>
 ```
 $ npm run dev
 ```
+
 
 References:<br/>
 <a href="https://vuejs.org/v2/guide/installation.html"><img src="https://vuejs.org/images/logo.png" width=40 height=40>Vue.js : Installation Guide</a><br/>
