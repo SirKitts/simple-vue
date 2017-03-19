@@ -1,5 +1,5 @@
 # simple-vue
-Simple Vue Samples
+> Simple Vue Samples
 
 Install Vue:<br/>
 ```
