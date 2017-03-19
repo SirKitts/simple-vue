@@ -10,7 +10,7 @@ $ npm install vue
 $ npm install -g vue-cli
 ```
 
-Create new project
+Create new project:
 ```
 # create a new project using the "webpack" boilerplate
 $ vue init webpack vue-project
