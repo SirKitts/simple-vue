@@ -1,6 +1,6 @@
 <template>
   <div class="video-item">
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg }} {{$route.params.id}}</h1>
     <md-card class="card-example">
       <md-card-area md-inset>
         <md-card-media md-ratio="16:9">
@@ -42,10 +42,22 @@
 <script>
 export default {
   name: 'video-item',
+  props: {
+    id: String
+  },
   data () {
     return {
-      msg: 'Video Sample #1'
+      msg: 'Video Item',
+      title: '',
+      url: ''
     }
+  },
+  ready () {
+    let url = 'http://url/here/1'
+    this.$http.get(url, function (data) {
+      this.$set('title', data.title)
+      this.$set('url', data.url)
+    })
   }
 }
 </script>
