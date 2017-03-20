@@ -14,6 +14,10 @@ export default new VueRouter({
       component: Home
     },
     {
+      path: '/video',
+      component: Video
+    },
+    {
       path: '/video/:id',
       component: Video
     },
