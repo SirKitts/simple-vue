@@ -1,6 +1,6 @@
 <template>
   <div class="video-item">
-    <h1>{{ msg }} {{$route.params.id}}</h1>
+    <h1>{{ msg }} {{title}} {{$route.params.id}}</h1>
     <md-card class="card-example">
       <md-card-area md-inset>
         <md-card-media md-ratio="16:9">
@@ -40,6 +40,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 export default {
   name: 'video-item',
   props: {
@@ -52,11 +58,21 @@ export default {
       url: ''
     }
   },
-  ready () {
-    let url = 'http://url/here/1'
-    this.$http.get(url, function (data) {
-      this.$set('title', data.title)
-      this.$set('url', data.url)
+  mounted () {
+    var self = this
+    /*
+    axios.get('https://api.github.com/users/codeheaven-io')
+    .then(function (response) {
+      console.log(response.data)
+      console.log(response.status)
+      console.log(response.data.login)
+      self.title = response.data.login
+    })
+    */
+    this.$http.get('https://api.github.com/users/codeheaven-io')
+    .then((response) => {
+      console.log(response.data)
+      self.title = response.data.type
     })
   }
 }

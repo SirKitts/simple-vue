@@ -4,6 +4,7 @@
     <top-nav/>
     <li v-for="(item, index) in items">
       <router-link exact to="/video/1">{{index}} {{ item.message }}</router-link>
+      <router-link exact to="/video/2">{{index}} {{ item.message }}</router-link>
     </li>
     <video-item/>
   </div>
@@ -31,13 +32,6 @@ export default {
       ],
       videos: []
     }
-  },
-  ready () {
-    this.$http.get('api/videos').success(function (data) {
-      this.$set('videos', data)
-    }).error(function (error) {
-      console.log(error)
-    })
   }
 }
 </script>
