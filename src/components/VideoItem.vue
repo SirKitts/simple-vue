@@ -55,7 +55,7 @@ export default {
     return {
       msg: 'Video Item',
       title: '',
-      url: ''
+      duration: '150'
     }
   },
   mounted () {
@@ -68,6 +68,13 @@ export default {
       console.log(response.data.login)
       self.title = response.data.login
     })
+    let duration = 150
+    let hours = duration / 60
+    let minutes = duration % 60
+    let hr = hours.toString().split(".")
+    let mins = minutes.toString().split(".")
+    let secs = (minutes * 60) % 60
+    let time = hr[0] + 'h' + mins[0] + 'm'+ secs + 's'
     */
     this.$http.get('https://api.github.com/users/codeheaven-io')
     .then((response) => {
