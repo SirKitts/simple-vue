@@ -3,8 +3,8 @@
     <h1>{{ msg }} {{$route.params.id}}</h1>
     <top-nav/>
     <li v-for="(item, index) in items">
-      <router-link exact to="/video/1">{{index}} {{ item.message }}</router-link>
-      <router-link exact to="/video/2">{{index}} {{ item.message }}</router-link>
+      <router-link :to="{ name: 'videoById', params: { id: index+1 }}">{{index}} {{ item.message }}</router-link>
+      <!--http://router.vuejs.org/en/api/router-link.html-->
     </li>
     <video-item/>
   </div>

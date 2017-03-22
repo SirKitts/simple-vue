@@ -11,18 +11,22 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
       component: Home
     },
     {
       path: '/video',
+      name: 'video',
       component: Video
     },
     {
       path: '/video/:id',
+      name: 'videoById',
       component: Video
     },
     {
       path: '/about',
+      name: 'about',
       component: About
     }
   ]
