@@ -10,8 +10,12 @@ import router from './router'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
+import Vuetify from 'vuetify'
+
 Vue.use(VueAxios, axios)
 Vue.use(VueMaterial)
+Vue.use(Vuetify)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

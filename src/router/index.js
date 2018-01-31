@@ -2,8 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '@/pages/Home'
-import Video from '@/pages/Video'
-import About from '@/pages/About'
+import Search from '@/pages/Search'
 
 Vue.use(VueRouter)
 
@@ -15,19 +14,9 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: '/video',
-      name: 'video',
-      component: Video
-    },
-    {
-      path: '/video/:id',
-      name: 'videoById',
-      component: Video
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })
