@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     changeMe () {
-      this.$emit('changeMe2', this.sliderVal)
+      this.$emit('child-id2', this.sliderVal)
     }
   }
 }

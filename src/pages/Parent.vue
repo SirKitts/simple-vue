@@ -1,9 +1,12 @@
 <template>
   <div class="parent">
     {{msg}}
-    {{number1}} <Child1 :id="id" @child-id="changeMe1"></Child1>
-    {{number2}} <Child2 :id="id" @child-id="changeMe2"></Child2>
-    {{number3}} <Child3 :id="id" @child-id="changeMe3"></Child3>
+    <Child1 :id="id" @child-id1="changeMe1"></Child1>
+    {{number1}}
+    <Child2 :id="id" v-on:child-id2="changeMe2"></Child2>
+    {{number2}}
+    <Child3 :id="id" @child-id3="changeMe3"></Child3>
+    {{number3}}
   </div>
 </template>
 
@@ -22,21 +25,35 @@ export default {
   data () {
     return {
       msg: 'Parent-Child emit sample',
-      id: '100',
-      number1: '',
-      number2: '',
-      number3: ''
+      number1: '1',
+      number2: '2',
+      number3: '3'
     }
   },
+  /*
+  created () {
+    this.$on('child-id1', function (n) {
+      this.number1 = n
+    }
+  },
+  */
   methods: {
-    changeMe1 (id) {
-      console.log('change1!', id)
+    changeMe1 (value) {
+      this.number = value
+      /*
+      this.$on('changeMe1', function (n) {
+        this.number1 = n
+      })
+      */
+      console.log('change1!', value)
     },
-    changeMe2 (id) {
-      console.log('change2!', id)
+    changeMe2 (value) {
+      this.number = value
+      console.log('change2!', value)
     },
-    changeMe3 (id) {
-      console.log('change3!', id)
+    changeMe3 (value) {
+      this.number = value
+      console.log('change3!', value)
     }
   }
 }
