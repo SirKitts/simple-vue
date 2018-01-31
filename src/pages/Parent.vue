@@ -39,7 +39,7 @@ export default {
   */
   methods: {
     changeMe1 (value) {
-      this.number = value
+      this.number1 = value
       /*
       this.$on('changeMe1', function (n) {
         this.number1 = n
@@ -48,11 +48,11 @@ export default {
       console.log('change1!', value)
     },
     changeMe2 (value) {
-      this.number = value
+      this.number2 = value
       console.log('change2!', value)
     },
     changeMe3 (value) {
-      this.number = value
+      this.number3 = value
       console.log('change3!', value)
     }
   }
