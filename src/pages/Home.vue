@@ -1,35 +1,30 @@
 <template>
   <div class="home">
     {{msg}}
-    <Slider :id="selectedVideo.store.video.id" @change-id="changeMe"></Slider>
-    <Videos/>
-    <Collections/>
+    <Tree @slider-value="changeMe"></Tree>
   </div>
 </template>
 
 <script>
-import store from '@/js/store'
-import Videos from '@/components/Videos.vue'
-import Collections from '@/components/Collections.vue'
-import Slider from '@/components/Slider.vue'
+import Tree from '@/components/Tree.vue'
 
 export default {
   name: 'home',
   components: {
-    Videos,
-    Collections,
-    Slider
+    Tree
   },
   data () {
     return {
       msg: 'Home',
-      selectedVideo: store
+      id: '12345'
     }
   },
   methods: {
     changeMe (id) {
       console.log('change!', id)
+      this.id = id
     }
   }
 }
 </script>
+

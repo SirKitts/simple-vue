@@ -30,6 +30,7 @@ $ npm install
 Install Vue Material:<br/>
 ```
 $ npm install vue-material --save
+npm install --save axios vue-axios
 ```
 
 Insert this in index.html
@@ -40,10 +41,26 @@ Insert this in index.html
 
 Insert this in main.js
 ```
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
+Vue.use(VueAxios, axios)
 Vue.use(VueMaterial)
+```
+
+To access data from http
+```
+Vue.axios.get(api).then((response) => {
+  console.log(response.data)
+})
+ 
+this.axios.get(api).then((response) => {
+  console.log(response.data)
+})
 ```
 
 Start Server:<br/>
