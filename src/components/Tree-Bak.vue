@@ -2,14 +2,13 @@
   <div>
       <li>
         <div
-          v-if="model.id > 0"
           :class="{bold: isFolder}"
           @click="toggle"
           @dblclick="changeType">
-          <span v-if="isFolder">[{{ model.open ? '-' : '+' }}]</span>
           {{ model.name }}
+          <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
         </div>
-        <ul v-show="model.open" v-if="isFolder">
+        <ul v-show="open" v-if="isFolder">
           <item
             class="item"
             v-for="(model, index) in model.children"
@@ -33,7 +32,7 @@ export default {
   },
   data () {
     return {
-      open: true
+      open: false
     }
   },
   computed: {
@@ -45,22 +44,19 @@ export default {
   methods: {
     toggle: function () {
       if (this.isFolder) {
-        this.model.open = !this.model.open
+        this.open = !this.open
       }
     },
     changeType: function () {
       if (!this.isFolder) {
         Vue.set(this.model, 'children', [])
         this.addChild()
-        this.model.open = true
+        this.open = true
       }
     },
     addChild: function () {
       this.model.children.push({
-        id: '99',
-        name: 'New Category',
-        parentId: this.model.id,
-        open: false
+        name: 'new stuff'
       })
     }
   },
@@ -81,11 +77,9 @@ export default {
   .bold {
     font-weight: bold;
   }
-  ul, li {
-    margin:0;
-    padding:0;
+  ul {
     padding-left: 1em;
     line-height: 1.5em;
-    list-style-type: none;
+    list-style-type: dot;
   }
 </style>
