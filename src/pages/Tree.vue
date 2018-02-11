@@ -5,7 +5,8 @@
     <ul id="tree">
       <Tree
         class="item"
-        :model="treeData">
+        :model="treeData"
+        @interface="changeMe">
       </Tree>
     </ul>
   </div>
@@ -109,7 +110,14 @@ export default {
   },
   data () {
     return {
-      treeData: data
+      treeData: data,
+      selectedCategories: []
+    }
+  },
+  methods: {
+    changeMe (value) {
+      this.selectedCategories = value
+      console.log('change!', value)
     }
   }
 }

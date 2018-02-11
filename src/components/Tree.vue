@@ -4,10 +4,20 @@
         <div
           v-if="model.id > 0"
           :class="{bold: isFolder}"
+          class="folder"
           @click="toggle"
           @dblclick="changeType">
-          <span v-if="isFolder">[{{ model.open ? '-' : '+' }}]</span>
+          <span v-if="isFolder">
+            <img v-if="model.open" src="../assets/folder-close.png" width="20" height="10"/>
+            <img v-else src="../assets/folder-open.png" width="20" height="10"/>
+          </span>
+          <span>
+            <input type="checkbox" 
+              v-model="checkedIds[model.id]"
+              @change="changeMe"/>
+            </span>
           {{ model.name }}
+          <img v-if="model.id == 1" src="../assets/star.png" width="20" height="10"/>
         </div>
         <ul v-show="model.open" v-if="isFolder">
           <item
@@ -16,7 +26,7 @@
             :key="index"
             :model="model">
           </item>
-          <li class="add" @click="addChild">+</li>
+          <!--li class="add" @click="addChild">+</li-->
         </ul>
       </li>
   </div>
@@ -33,7 +43,8 @@ export default {
   },
   data () {
     return {
-      open: true
+      // open: true
+      checkedIds: []
     }
   },
   computed: {
@@ -62,10 +73,14 @@ export default {
         parentId: this.model.id,
         open: false
       })
+    },
+    changeMe () {
+      console.log('change!', this.checkedIds)
+      this.$emit('interface', this.checkedIds)
     }
   },
   created: function () {
-    console.log('model', this.model)
+    // console.log('model', this.model)
   }
 }
 </script>
@@ -80,6 +95,9 @@ export default {
   }
   .bold {
     font-weight: bold;
+  }
+  .folder {
+    text-align: left;
   }
   ul, li {
     margin:0;
