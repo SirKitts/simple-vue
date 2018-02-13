@@ -12,21 +12,28 @@
             <img v-else src="../assets/folder-open.png" width="20" height="10"/>
           </span>
           <span>
-            <input type="checkbox" 
-              v-model="checkedIds[model.id]"
-              @change="changeMe"/>
-            </span>
-          {{ model.name }}
-          <img v-if="model.id == 1" src="../assets/star.png" width="20" height="10"/>
+            <img v-if="model.id === selected.store.category.primary" 
+              src="../assets/star.png" width="20" height="10"/>
+            <input v-else 
+              type="checkbox" 
+              v-model="selected.store.category.ids"
+              :value="model.id"
+              @change="changeMe"
+              :disabled="model.id === selected.store.category.primary"/>
+          </span>
+          <span @click="changePrimaryCategory">
+            {{ model.id }} {{ model.name }}
+          </span>
+          <!--img v-if="model.id === selected.store.category.primary" src="../assets/star.png" width="20" height="10"/-->
         </div>
         <ul v-show="model.open" v-if="isFolder">
           <item
             class="item"
-            v-for="(model, index) in model.children"
-            :key="index"
-            :model="model">
+            v-for="submodel in model.children"
+            :key="submodel.id"
+            :model="submodel">
           </item>
-          <!--li class="add" @click="addChild">+</li-->
+          <li class="add" @click="addChild">+</li>
         </ul>
       </li>
   </div>
@@ -34,6 +41,7 @@
 
 <script>
 import Vue from 'vue'
+import store from '@/js/store'
 
 export default {
   name: 'item',
@@ -44,7 +52,7 @@ export default {
   data () {
     return {
       // open: true
-      checkedIds: []
+      selected: store
     }
   },
   computed: {
@@ -58,6 +66,10 @@ export default {
       if (this.isFolder) {
         this.model.open = !this.model.open
       }
+    },
+    changePrimaryCategory: function () {
+      this.selected.store.category.primary = this.model.id
+      this.selected.store.category.ids.push(this.model.id)
     },
     changeType: function () {
       if (!this.isFolder) {
@@ -75,12 +87,9 @@ export default {
       })
     },
     changeMe () {
-      console.log('change!', this.checkedIds)
-      this.$emit('interface', this.checkedIds)
+      console.log('at component:', this.selected.store.category.ids)
+      this.$emit('interface', this.selected.store.category.ids)
     }
-  },
-  created: function () {
-    // console.log('model', this.model)
   }
 }
 </script>
@@ -96,7 +105,7 @@ export default {
   .bold {
     font-weight: bold;
   }
-  .folder {
+  .folder, .add {
     text-align: left;
   }
   ul, li {
