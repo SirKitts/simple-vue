@@ -18,6 +18,7 @@ import store from '@/js/store'
 import Tree from '@/components/Tree.vue'
 
 // demo data
+// https://emberigniter.com/transform-any-data-structure-with-javascript-reduce/
 var data = {
   id: '0',
   parentId: -1,
