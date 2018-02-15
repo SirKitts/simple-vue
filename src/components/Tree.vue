@@ -17,14 +17,22 @@
             <input v-else 
               type="checkbox" 
               v-model="selected.store.category.ids"
-              :value="model.id"
+              :value="model"
               @change="changeMe"
               :disabled="model.id === selected.store.category.primary"/>
+            <!--md-checkbox 
+              v-else
+              v-model="selected.store.category.ids" 
+              value=model
+              @change="changeMe"
+              :disabled="model.id === selected.store.category.primary">
+            </md-checkbox-->
           </span>
           <span @click="changePrimaryCategory">
             {{ model.id }} {{ model.name }}
           </span>
-          <!--img v-if="model.id === selected.store.category.primary" src="../assets/star.png" width="20" height="10"/-->
+          <!--img v-if="model.id === selected.store.category.primary" 
+            src="../assets/star.png" width="20" height="10"/-->
         </div>
         <ul v-show="model.open" v-if="isFolder">
           <item
@@ -68,8 +76,8 @@ export default {
       }
     },
     changePrimaryCategory: function () {
-      this.selected.store.category.primary = this.model.id
-      this.selected.store.category.ids.push(this.model.id)
+      this.selected.store.category.primary = this.model
+      this.selected.store.category.ids[this.model.id] = this.model
     },
     changeType: function () {
       if (!this.isFolder) {
