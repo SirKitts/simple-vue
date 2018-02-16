@@ -9,7 +9,10 @@
         @interface="changeMe">
       </Tree>
     </ul>
-    {{ selected }}<br/>
+    <div>
+        <md-button class="md-primary" @click="testMe">Test Me</md-button>
+    </div>
+    {{ flattenMeArr }}<br/>
   </div>
 </template>
 
@@ -19,6 +22,29 @@ import Tree from '@/components/Tree.vue'
 
 // demo data
 // https://emberigniter.com/transform-any-data-structure-with-javascript-reduce/
+var nested = {
+  id: 1,
+  children: [
+    {
+      id: 2
+    },
+    {
+      id: 3,
+      children: [
+        {
+          id: 5
+        },
+        {
+          id: 6
+        }
+      ]
+    },
+    {
+      id: 4
+    }
+  ]
+}
+
 var data = {
   id: '0',
   parentId: -1,
@@ -133,14 +159,31 @@ export default {
   data () {
     return {
       treeData: data,
+      nestedData: nested,
       selectedCategories: [],
-      selected: store
+      flattenMeObj: {},
+      flattenMeArr: [],
+      selections: store
     }
   },
   methods: {
     changeMe (value) {
-      console.log('at page:', value)
-      this.selectedCategories = value
+      // console.log('at page:', value)
+      this.flattenMeArr = this.selectedCategories = value
+    },
+    testMe () {
+      this.flattenMeArr = this.flatten(this.nestedData)
+    },
+    flatten (obj) {
+      const array = Array.isArray(obj) ? obj : [obj]
+      return array.reduce(function (acc, value) {
+        acc.push(value)
+        if (value.children) {
+          // acc = acc.concat(this.flatten(value.children))
+          // delete value.children
+        }
+        return acc
+      }, [])
     }
   }
 }
