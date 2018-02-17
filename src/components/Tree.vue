@@ -103,16 +103,30 @@ export default {
       })
     },
     changeCategory (model) {
-      this.selections.store.category.ids[this.model.id] = !this.selections.store.category.ids[this.model.id]
+      const category = this.selections.store.category
+      const element = this.getCategoryModel(model)
+      const catId = this.model.id
 
-      if (this.selections.store.category.ids[this.model.id]) {
-        this.selections.store.category.selections.push(this.getCategoryModel(model))
+      category.ids[catId] = !category.ids[catId]
+
+      if (category.ids[catId]) {
+        category.selections.push(element)
       } else {
-        const index = this.selections.store.category.selections.indexOf(this.getCategoryModel(model))
+        const removeIndex = category.selections.map(function (item) {
+          return item.id
+        })
+          .indexOf(catId)
+
+        // remove object
+        category.selections.splice(removeIndex, 1)
+
+        /*
+        const index = category.selections.indexOf(element)
         console.log('index', index)
         if (index !== -1) {
-          this.selections.store.category.selections.splice(0, 1)
+          category.selections.splice(0, 1)
         }
+        */
       }
       // console.log('at component:', this.selections.store.category.ids)
       // this.payload.push(this.getCategoryModel(model))
