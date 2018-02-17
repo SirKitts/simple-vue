@@ -12,26 +12,26 @@
             <img v-else src="../assets/folder-open.png" width="20" height="10"/>
           </span>
           <span>
-            <img v-if="model.id === selected.store.category.primary" 
+            <img v-if="model.id === selections.store.category.primary" 
               src="../assets/star.png" width="20" height="10"/>
-            <input v-else 
+            <!--input v-else 
               type="checkbox" 
-              v-model="selected.store.category.ids"
+              v-model="selections.store.category.ids[model.id]"
               :value="model"
               @change="changeMe"
-              :disabled="model.id === selected.store.category.primary"/>
-            <!--md-checkbox 
+              :disabled="model.id === selections.store.category.primary"/-->
+            <md-checkbox 
               v-else
-              v-model="selected.store.category.ids" 
-              value=model
-              @change="changeMe"
-              :disabled="model.id === selected.store.category.primary">
-            </md-checkbox-->
+              v-model="selections.store.category.ids[model.id]" 
+              :value="getCategoryModel(model)"
+              :disabled="model.id === selections.store.category.primary"
+              @change="changeCategory(model)">
+            </md-checkbox>
           </span>
           <span @click="changePrimaryCategory">
-            {{ model.id }} {{ model.name }}
+            {{ model.id }} {{ model.name }} {{ getCategoryModel(model) }}
           </span>
-          <!--img v-if="model.id === selected.store.category.primary" 
+          <!--img v-if="model.id === selections.store.category.primary" 
             src="../assets/star.png" width="20" height="10"/-->
         </div>
         <ul v-show="model.open" v-if="isFolder">
@@ -60,7 +60,8 @@ export default {
   data () {
     return {
       // open: true
-      selected: store
+      selections: store,
+      payload: []
     }
   },
   computed: {
@@ -75,9 +76,16 @@ export default {
         this.model.open = !this.model.open
       }
     },
+    getCategoryModel: function (model) {
+      return {
+        'id': model.id,
+        'name': model.name,
+        'parentId': model.parentId
+      }
+    },
     changePrimaryCategory: function () {
-      this.selected.store.category.primary = this.model
-      this.selected.store.category.ids[this.model.id] = this.model
+      this.selections.store.category.primary = this.model
+      this.selections.store.category.ids[this.model.id] = this.model.id
     },
     changeType: function () {
       if (!this.isFolder) {
@@ -94,9 +102,23 @@ export default {
         open: false
       })
     },
-    changeMe () {
-      console.log('at component:', this.selected.store.category.ids)
-      this.$emit('interface', this.selected.store.category.ids)
+    changeCategory (model) {
+      this.selections.store.category.ids[this.model.id] = !this.selections.store.category.ids[this.model.id]
+
+      if (this.selections.store.category.ids[this.model.id]) {
+        this.selections.store.category.selections.push(this.getCategoryModel(model))
+      } else {
+        const index = this.selections.store.category.selections.indexOf(this.getCategoryModel(model))
+        console.log('index', index)
+        if (index !== -1) {
+          this.selections.store.category.selections.splice(0, 1)
+        }
+      }
+      // console.log('at component:', this.selections.store.category.ids)
+      // this.payload.push(this.getCategoryModel(model))
+      // console.log('at component payload:', this.payload)
+      console.log('at component selections payload:', this.selections.store.category.selections)
+      // this.$emit('tree-interface', this.selections.store.category.selections)
     }
   }
 }

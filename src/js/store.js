@@ -6,7 +6,8 @@ export default {
     },
     category: {
       ids: [],
-      primary: '5'
+      primary: '',
+      selections: []
     }
   }
 }
