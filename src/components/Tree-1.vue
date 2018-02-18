@@ -14,22 +14,19 @@
           <span>
             <img v-if="model.id === selections.store.category.primary" 
               src="../assets/star.png" width="20" height="10"/>
-            <input v-else 
-              type="checkbox" 
-              v-model="selections.store.category.ids"
-              :value="getCategoryModel(model)"
-              :disabled="model.id === selections.store.category.primary"/>
             <!--input v-else 
               type="checkbox" 
               v-model="selections.store.category.ids[model.id]"
               :value="model"
               @change="changeMe"
               :disabled="model.id === selections.store.category.primary"/-->
-            <!--md-checkbox 
+            <md-checkbox 
               v-else
-              :v-model="selections.store.category.ids[model.id]" 
-              :value="getCategoryModel(model)">
-            </md-checkbox-->
+              v-model="selections.store.category.ids" 
+              value="model.id"
+              :disabled="model.id === selections.store.category.primary"
+              @change="changeCategory(model)">
+            </md-checkbox>
             <!--md-checkbox 
               v-else
               v-model="selections.store.category.ids[model.id]" 
@@ -39,7 +36,7 @@
             </md-checkbox-->
           </span>
           <span @click="changePrimaryCategory">
-            {{ model.id }} {{ model.name }}
+            {{ model.id }} {{ model.name }} {{ getCategoryModel(model) }}
           </span>
           <!--img v-if="model.id === selections.store.category.primary" 
             src="../assets/star.png" width="20" height="10"/-->
@@ -130,8 +127,20 @@ export default {
         })
           .indexOf(catId)
 
+        // remove object
         category.selections.splice(removeIndex, 1)
+
+        /*
+        const index = category.selections.indexOf(element)
+        console.log('index', index)
+        if (index !== -1) {
+          category.selections.splice(0, 1)
+        }
+        */
       }
+      // console.log('at component:', this.selections.store.category.ids)
+      // this.payload.push(this.getCategoryModel(model))
+      // console.log('at component payload:', this.payload)
       console.log('at component selections payload:', this.selections.store.category.selections)
       // this.$emit('tree-interface', this.selections.store.category.selections)
     }

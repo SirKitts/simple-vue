@@ -15,11 +15,11 @@
     <div>
       {{ selections.store.category.ids }}
     </div>
-    <div>
+    <!--div>
       {{ selectedCategories }}
-    </div>
+    </div-->
     <div>
-      {{ this.selections.store.category.selections }}
+      {{ selections.store.category.selections }}
     </div>
   </div>
 </template>
@@ -123,7 +123,7 @@ var data = {
               primeCat: false
             },
             {
-              id: '12',
+              id: '120',
               parentId: 10,
               name: 'Players',
               open: false,
