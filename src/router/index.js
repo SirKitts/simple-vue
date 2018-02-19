@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '@/pages/Home'
 import Parent from '@/pages/Parent'
 import Emit from '@/pages/Emit'
+import Form from '@/pages/Form'
 import Search from '@/pages/Search'
 import Tree from '@/pages/Tree'
 
@@ -17,7 +18,12 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: '/emit',
+      path: '/form',
+      name: 'form',
+      component: Form
+    },
+    {
+      path: '/form',
       name: 'emit',
       component: Emit
     },
