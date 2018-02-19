@@ -13,6 +13,7 @@
         </option>
       </select>
     </div>
+    <local-component></local-component>
     <div>
       {{ seriesId }}
     </div>
@@ -30,11 +31,18 @@ var data = [
   {id: '71', name: 'AFL7'}
 ]
 
+var Child = {
+  template: '<div>A custom component!</div>'
+}
+
 export default {
   name: 'item',
   template: 'form-template',
   props: {
     model: Object
+  },
+  components: {
+    'local-component': Child
   },
   data () {
     return {
