@@ -2,6 +2,7 @@
   <div class="form">
     <Form @change-form="changeMe"></Form>
     {{ form }}
+    <div v-demo="{ color: 'black', text: 'hello!' }"></div>
   </div>
 </template>
 

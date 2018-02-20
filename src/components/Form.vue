@@ -44,6 +44,7 @@ export default {
   components: {
     'local-component': Child
   },
+  // mixins: [myMixin],
   data () {
     return {
       seriesId: {id: '51', name: 'AFL5'},

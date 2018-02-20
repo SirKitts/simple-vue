@@ -11,10 +11,12 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
 import Vuetify from 'vuetify'
+import Demo from './plugins/demo'
 
 Vue.use(VueAxios, axios)
 Vue.use(VueMaterial)
 Vue.use(Vuetify)
+Vue.use(Demo)
 
 Vue.config.productionTip = false
 
