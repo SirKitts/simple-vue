@@ -134,7 +134,26 @@ export default {
       }
       console.log('at component selections payload:', this.selections.store.category.selections)
       // this.$emit('tree-interface', this.selections.store.category.selections)
+    },
+    openParentCategories () {
+      /*
+      const model = {
+        id: this.model.id,
+        parentId: this.model.parentId,
+        name: this.model.name
+      }
+      if (this.selections.store.category.ids.includes(model)) {
+        this.model.open = true
+      }
+      */
+      if (['9', '10', '12'].includes(this.model.id)) {
+        this.model.open = true
+      }
     }
+  },
+  created () {
+    this.openParentCategories()
+    // console.log('primary', this.selections.store.category.primary)
   }
 }
 </script>

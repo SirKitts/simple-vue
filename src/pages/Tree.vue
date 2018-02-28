@@ -10,16 +10,23 @@
       </Tree>
     </ul>
     <div>
-        <md-button class="md-primary" @click="testMe">Test Me</md-button>
+        <!--md-button class="md-primary" @click="testMe">flattenMeArr Me</md-button-->
+        <md-button class="md-primary" @click.native="getParent">Get Parents</md-button>
     </div>
     <div>
       {{ selections.store.category.ids }}
     </div>
     <!--div>
       {{ selectedCategories }}
-    </div-->
+    </div>
     <div>
       {{ selections.store.category.selections }}
+    </div-->
+    <div>
+      {{ selections.store.category.primary }}
+    </div>
+    <div>
+      parents: {{ parents }}
     </div>
   </div>
 </template>
@@ -123,11 +130,27 @@ var data = {
               primeCat: false
             },
             {
-              id: '120',
+              id: '12',
               parentId: 10,
               name: 'Players',
               open: false,
-              primeCat: false
+              primeCat: false,
+              children: [
+                {
+                  id: '13',
+                  parentId: 12,
+                  name: 'Teams',
+                  open: false,
+                  primeCat: false
+                },
+                {
+                  id: '14',
+                  parentId: 12,
+                  name: 'Players',
+                  open: false,
+                  primeCat: false
+                }
+              ]
             }
           ]
         }
@@ -146,6 +169,7 @@ export default {
       treeData: data,
       selectedCategories: [],
       flattenMeArr: [],
+      parents: [],
       selections: store
     }
   },
@@ -156,6 +180,9 @@ export default {
     },
     testMe () {
       this.flattenMeArr = this.flatten(this.treeData)
+    },
+    getParents () {
+      this.parents = this.treeData
     },
     flatten: function (obj) {
       const array = Array.isArray(obj) ? obj : [obj]
