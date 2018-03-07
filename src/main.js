@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import axios from 'axios'
+import lodash from 'lodash'
 import VueAxios from 'vue-axios'
 
 import App from './App'
@@ -13,7 +14,7 @@ import 'vue-material/dist/vue-material.css'
 import Vuetify from 'vuetify'
 import Demo from './plugins/demo'
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios, lodash)
 Vue.use(VueMaterial)
 Vue.use(Vuetify)
 Vue.use(Demo)

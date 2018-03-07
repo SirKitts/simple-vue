@@ -10,23 +10,27 @@
       </Tree>
     </ul>
     <div>
-        <!--md-button class="md-primary" @click="testMe">flattenMeArr Me</md-button-->
-        <md-button class="md-primary" @click.native="getParent">Get Parents</md-button>
-    </div>
-    <div>
-      {{ selections.store.category.ids }}
+        <md-button class="md-primary" @click="testMe">flatten Data</md-button>
+        <!--md-button class="md-primary" @click.native="getParent">Get Parents</md-button-->
     </div>
     <!--div>
+      {{ selections.store.category.ids }}
+    </div>
+    <div>
       {{ selectedCategories }}
     </div>
     <div>
       {{ selections.store.category.selections }}
-    </div-->
+    </div>
     <div>
       {{ selections.store.category.primary }}
     </div>
     <div>
       parents: {{ parents }}
+    </div-->
+    <div>
+      flattended Data: 
+      <textarea>{{ flattenedData }}</textarea>
     </div>
   </div>
 </template>
@@ -168,7 +172,7 @@ export default {
     return {
       treeData: data,
       selectedCategories: [],
-      flattenMeArr: [],
+      flattenedData: [],
       parents: [],
       selections: store
     }
@@ -179,12 +183,29 @@ export default {
       this.selectedCategories = value
     },
     testMe () {
-      this.flattenMeArr = this.flatten(this.treeData)
+      // this.flattenedData = this.flatten(this.treeData)
+      this.flatten(this.treeData)
     },
     getParents () {
       this.parents = this.treeData
     },
     flatten: function (obj) {
+      const array = Array.isArray(obj) ? obj : [obj]
+      if (array.children) {
+        array.map((data) => {
+          const cat = {
+            id: data.id,
+            parentId: data.parenId
+          }
+          // this.flattenedData.push(cat)
+          if (data.children) {
+            this.flatten(cat)
+          }
+          return ''
+        })
+      }
+    },
+    flattenX: function (obj) {
       const array = Array.isArray(obj) ? obj : [obj]
       return array.reduce(function (acc, value) {
         acc.push(value)

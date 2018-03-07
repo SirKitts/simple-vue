@@ -7,6 +7,7 @@ import Emit from '@/pages/Emit'
 import Form from '@/pages/Form'
 import Search from '@/pages/Search'
 import Tree from '@/pages/Tree'
+import Omit from '@/pages/Omit'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ export default new VueRouter({
       path: '/tree',
       name: 'tree',
       component: Tree
+    },
+    {
+      path: '/omit',
+      name: 'omit',
+      component: Omit
     }
   ]
 })
