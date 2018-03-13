@@ -8,6 +8,7 @@ import Form from '@/pages/Form'
 import Search from '@/pages/Search'
 import Tree from '@/pages/Tree'
 import Omit from '@/pages/Omit'
+import Upload from '@/pages/Upload'
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,11 @@ export default new VueRouter({
       path: '/omit',
       name: 'omit',
       component: Omit
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Upload
     }
   ]
 })
